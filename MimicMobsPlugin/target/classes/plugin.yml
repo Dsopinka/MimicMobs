@@ -1,0 +1,12 @@
+name: MimicMobsPlugin
+version: 1.0-SNAPSHOT
+main: com.dsopinka.mimicmobs.MimicMobsPlugin
+api-version: 1.21
+description: A Minecraft plugin for Mimic Mobs
+authors:
+  - David Sopinka
+
+commands:
+  mimic:
+    description: Main command for Mimic Mobs plugin
+    usage: /mimic <list>

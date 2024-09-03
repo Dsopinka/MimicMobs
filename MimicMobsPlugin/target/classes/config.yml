@@ -1,0 +1,113 @@
+# ================================
+# Mimic Mobs Plugin Configuration
+# ================================
+# Welcome to the Mimic Mobs plugin!
+#
+# This plugin allows you to create "Mimics" that can be triggered when a player
+# breaks certain blocks. A Mimic can be configured to summon various mobs,
+# give rewards, and even have a time limit before it ends.
+#
+# The sections below will guide you through the configuration process.
+#
+# ----------------------------
+# Global Settings
+# ----------------------------
+# time_limit_enabled: Set this to true or false to enable or disable the time limit feature.
+# time_limit_seconds: The number of seconds before the mimic ends if time_limit_enabled is true.
+
+time_limit_enabled: true
+time_limit_seconds: 60
+
+# ----------------------------
+# Mimic Configuration
+# ----------------------------
+# This section is where you define your mimic setups.
+# Each mimic is tied to a specific block type. When a player breaks that block,
+# there is a chance that the mimic will be triggered.
+#
+# To add a new mimic, add a new block type under the "mimics" section.
+#
+# Example Configuration:
+#
+# mimics:
+#   DIAMOND_ORE:              # The block type that will trigger the mimic
+#     chance: 0.25            # The chance (0.0 to 1.0) that the mimic will trigger when the block is broken
+#     type: Summoning_Mimic   # The type of mimic. Options: "Explosive_Mimic", "Summoning_Mimic", "Ambusher_Mimic"
+#     summon_mobs:            # List of mobs to summon (only for Summoning_Mimic)
+#       - ZOMBIE
+#       - SKELETON
+#     summon_count: 3         # Number of each mob to summon (only for Summoning_Mimic)
+#     rewards:                # Rewards section, define what players get for defeating the mimic
+#       items:                # List of item rewards
+#         - material: DIAMOND # The material type (e.g., DIAMOND, GOLD_INGOT, etc.)
+#           amount: 2         # Amount of the item
+#       buffs:                # List of buffs to give to the player
+#         - INCREASE_DAMAGE:600:1  # Format: <PotionEffectType>:<duration>:<amplifier>
+#       xp: 100               # Amount of XP to give to the player
+#
+# ----------------------------
+# Available Mimic Types:
+# ----------------------------
+# 1. Explosive_Mimic:
+#    - Triggers an explosion when activated.
+#
+# 2. Summoning_Mimic:
+#    - Summons a specified number of mobs.
+#    - Example: summon_mobs:
+#                   - ZOMBIE
+#                   - SKELETON
+#
+# 3. Ambusher_Mimic:
+#    - Summons mobs in a surprise attack.
+#
+# ----------------------------
+# Command Reference:
+# ----------------------------
+# /mimic list - Displays a list of all configured mimics in the config file.
+#
+# ----------------------------
+# Additional Notes:
+# ----------------------------
+# - You can disable specific mimics by simply commenting them out or removing them from this file.
+# - The plugin will log errors if there are any issues with your configuration.
+# - Remember to reload the server after making changes to this configuration file.
+mimics:
+  DIAMOND_ORE:
+    chance: 1
+    type: Summoning_Mimic
+    summon_mobs:
+      - ZOMBIE
+      - SKELETON
+    summon_count: 3
+    cursed_mimic:
+      curse_chance: 0.3  # 30% chance to apply a curse
+      curses:
+        - POISON:200:1  # Poison I for 200 ticks (10 seconds)
+        - WEAKNESS:400:0  # Weakness I for 400 ticks (20 seconds)
+    rewards:
+      items:
+        - material: DIAMOND
+          amount: 2
+      buffs:
+        - STRENGTH:600:1
+      xp: 100 # Amount of XP to give as reward
+  Chest:
+    chance: 0.2
+    type: Explosive_Mimic
+    explosion_power: 2.0
+    rewards:
+      items:
+        - material: GOLD_INGOT
+          amount: 5
+  Stone:
+    chance: 0.05
+    type: Ambusher_Mimic
+    ambush_mob: SILVERFISH
+    ambush_count: 5
+    cursed_mimic:
+      curse_chance: 0.1  # 10% chance to apply a curse
+      curses:
+        - BLINDNESS:100:0  # Blindness I for 100 ticks (5 seconds)
+    rewards:
+      buffs:
+        - SPEED:1200:2  # Gives Speed II for 1200 ticks (1 minute)
